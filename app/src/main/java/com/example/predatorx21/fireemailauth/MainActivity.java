@@ -3,6 +3,7 @@ package com.example.predatorx21.fireemailauth;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth mAuth;
 
     private EditText emailTxt,passTxt;
-    //initialize android lifecycle states .-----------------------------------------------
+    //initialize android lifecycle states .---------------------------------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //updateUI(currentUser);
     }
 
+    //----------------------------------------------------------------------------------------------
     @Override
     public void onClick(View view) {
         String email=emailTxt.getText().toString();
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //-------------------------------------------------SIGN OUT---------------------------------------------------
     private void signOut() {
         mAuth.signOut();
         FirebaseUser user=mAuth.getCurrentUser();
@@ -71,7 +74,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //-----------------------------------------------SIGN IN------------------------------------------------------
     private void signIn(String email, String password) {
+        if(!validateForm()){
+            return;
+        }
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -97,7 +104,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //-------------------------------------------------CREATE ACCOUNT---------------------------------------------
+
     private void createAccount(String email, String password) {
+        if(!validateForm()){
+            return;
+        }
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -117,7 +129,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+
     private void emailVerification() {
+        if(!validateForm()){
+            return;
+        }
         findViewById(R.id.everifyBtn).setEnabled(false);
         final FirebaseUser user=mAuth.getCurrentUser();
         user.sendEmailVerification().addOnCompleteListener(this, new OnCompleteListener<Void>() {
@@ -136,5 +152,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+    }
+
+    //------------------------------------------------------------------VALIDATE THE FORM---------------------------------------
+    private boolean validateForm() {
+        boolean flag=true;
+
+        String email=emailTxt.getText().toString();
+        String pass=passTxt.getText().toString();
+
+        if(TextUtils.isEmpty(email)){
+            emailTxt.setError("Required.");
+            flag=false;
+        }
+        if(TextUtils.isEmpty(pass)){
+            passTxt.setError("Required.");
+            flag=false;
+        }
+        return flag;
     }
 }
