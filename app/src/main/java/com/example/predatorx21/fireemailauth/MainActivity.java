@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Log.w(TAG, "signInWithEmail:failure", task.getException());
                     Toast.makeText(MainActivity.this, "Authentication failed. You are not registered here",
                             Toast.LENGTH_SHORT).show();
-                    //updateUI(null);
+                    updateUI(null);
                 }
             }
         });
@@ -102,6 +102,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(user!=null){
             Toast.makeText(MainActivity.this,"sign in sucessfull......",Toast.LENGTH_SHORT);
         }
+    }
+
+    private void updateUI(Object o) {
+
     }
 
     //-------------------------------------------------CREATE ACCOUNT---------------------------------------------
