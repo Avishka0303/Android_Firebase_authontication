@@ -19,8 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG="MainActivity";
-    private FirebaseAuth mAuth;
-
+    public static FirebaseAuth mAuth;
     private EditText emailTxt,passTxt;
     //initialize android lifecycle states .---------------------------------------------------------
 
