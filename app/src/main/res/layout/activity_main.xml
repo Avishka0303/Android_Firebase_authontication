@@ -23,7 +23,7 @@
         android:layout_width="310sp"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
@@ -35,7 +35,7 @@
         android:layout_width="310sp"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="28dp"
         android:text="Email Verification"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passF" />
@@ -69,4 +69,14 @@
         android:text="Sign out"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signInbtn" />
+
+    <Button
+        android:id="@+id/gsignbtn"
+        android:layout_width="309dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="12dp"
+        android:text="Google Sign In"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signOutbtn" />
 </android.support.constraint.ConstraintLayout>
