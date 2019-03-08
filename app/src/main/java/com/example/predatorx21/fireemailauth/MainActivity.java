@@ -1,5 +1,6 @@
 package com.example.predatorx21.fireemailauth;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -88,20 +89,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(MainActivity.this, "Sign in email : success",
                             Toast.LENGTH_SHORT).show();
                     FirebaseUser user = mAuth.getCurrentUser();
-                    //updateUI(user);
+                    Intent intent=new Intent(".InformationActivity");
+                    startActivity(intent);
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.getException());
                     Toast.makeText(MainActivity.this, "Authentication failed. You are not registered here",
                             Toast.LENGTH_SHORT).show();
-                    updateUI(null);
                 }
             }
         });
         FirebaseUser user=mAuth.getCurrentUser();
-        if(user!=null){
-            Toast.makeText(MainActivity.this,"sign in sucessfull......",Toast.LENGTH_SHORT);
-        }
     }
 
     private void updateUI(Object o) {
@@ -161,7 +159,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //------------------------------------------------------------------VALIDATE THE FORM---------------------------------------
     private boolean validateForm() {
         boolean flag=true;
-
         String email=emailTxt.getText().toString();
         String pass=passTxt.getText().toString();
 
