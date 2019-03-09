@@ -31,13 +31,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static GoogleSignInClient signInClient;
 
     private static final int RC_KEY=9001;
-
     private EditText emailTxt,passTxt;
 
     //initialize android lifecycle states .---------------------------------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         emailTxt=findViewById(R.id.emailF);
         passTxt=findViewById(R.id.passF);
+
     }
 
     @Override
@@ -185,9 +186,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //-------------------------------------------------CREATE ACCOUNT---------------------------------------------
 
     private void createAccount(String email, String password) {
+
         if(!validateForm()){
             return;
         }
+
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -201,16 +204,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Log.w(TAG, "createUserWithEmail:failure", task.getException());
                     Toast.makeText(MainActivity.this, "Authentication failed.",
                             Toast.LENGTH_SHORT).show();
-                    //updateUI(null);
                 }
             }
         });
     }
 
     private void emailVerification() {
+
         if(!validateForm()){
             return;
         }
+
         findViewById(R.id.everifyBtn).setEnabled(false);
         final FirebaseUser user=mAuth.getCurrentUser();
         user.sendEmailVerification().addOnCompleteListener(this, new OnCompleteListener<Void>() {
